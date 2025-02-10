@@ -31,13 +31,15 @@ public class AnimalZoo {
             System.out.println("\n Welcome to Dublin Zoo!");
             System.out.println("1 - See all animals");
             System.out.println("2 - Search by type");
+            System.out.println("3 - Search by habitat");
             System.out.println("0 - Exit");
             System.out.print("Enter your choice: ");
-            
+
             String input = scanner.nextLine(); // Reading as string first
 
             int choice;
             try {
+                //this parsing is also a check for letters
                 choice = Integer.parseInt(input); // Convert to number
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
@@ -49,6 +51,8 @@ public class AnimalZoo {
                     displayAllAnimals();
                 case 2 ->
                     searchByTypeMenu();
+                case 3 ->
+                    searchByHabitatMenu();
                 case 0 -> {
                     System.out.println("Goodbye!");
                     scanner.close();
@@ -81,7 +85,7 @@ public class AnimalZoo {
             String input = scanner.nextLine(); // Read input as a string
 
             try {
-                typeChoice = Integer.parseInt(input);
+                typeChoice = Integer.parseInt(input);   //parsing input and covering a case of user entering letters
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
                 continue; // Restart the loop
@@ -90,6 +94,7 @@ public class AnimalZoo {
             if (typeChoice == 0) {
                 return; //return if typeChoice is 0(to start() loop where this is called from),
             }            //if not, i've assign returned matched value to type,
+            
             //using a newer type of switch expressions from java 14, where you can return 
             //a value using switch:
             String type = switch (typeChoice) {
@@ -113,27 +118,108 @@ public class AnimalZoo {
             }
         }
     }
+    
+    
+    private void searchByHabitatMenu() {
+        int habitatChoice;
+        while (true) {
+            System.out.println("\nSelect an animal habitat:");
+            System.out.println("1 - Desert");
+            System.out.println("2 - Grassland");
+            System.out.println("3 - Mountain");
+            System.out.println("4 - Rainforest");
+            System.out.println("5 - Forest");
+            System.out.println("6 - Savannah");
+            System.out.println("7 - Pond");
+            System.out.println("8 - Ocean");
+            System.out.println("9 - Swamp");
+            System.out.println("0 - Back to main menu");
+            System.out.print("Enter your choice: ");
 
-    private void displayAnimalsByType(String type) {
-        System.out.println("\n--- " + type + " ---");
-    boolean found = false;
+            String input = scanner.nextLine(); // Read input as a string
 
-    for (Animal animal : animals) {
-        if (animal.getClass().getSimpleName().equalsIgnoreCase(type)) {
-            found = true;
+            try {
+                habitatChoice = Integer.parseInt(input);   //parsing input and covering a case of user entering letters
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue; // Restart the loop
+            }
 
-            // Print animal details in a more readable way
-//            System.out.println("Name: " + animal.getName());
-//            System.out.println("Species: " + animal.getSpecie());
-//            System.out.println("Habitat: " + animal.getHabitat());
-//            System.out.println("");
-//            System.out.println("-------------------");
-              System.out.println(animal);
+            if (habitatChoice == 0) {
+                return; //return if typeChoice is 0(to start() loop where this is called from),
+            }            //if not, i've assign returned matched value to type,
+            
+            //using a newer type of switch expressions from java 14, where you can return 
+            //a value using switch:
+            String chosenHabitat = switch (habitatChoice) {
+                case 1 ->
+                    "Desert";
+                case 2 ->
+                    "Grassland";
+                case 3 ->
+                    "Mountain";
+                case 4 ->
+                    "Rainforest";
+                case 5 ->
+                    "Forest";
+                case 6 ->
+                    "Savannah";
+                case 7 ->
+                    "Pond";
+                case 8 ->
+                    "Ocean";
+                case 9 ->
+                    "Swamp";
+                default ->
+                    null;        //any other num turns default
+            };
+
+            //now working with type we got from switch, but checking if proper number was given before:
+            if (chosenHabitat != null) {
+                displayAnimalsByHabitat(chosenHabitat);
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
         }
     }
+    
+    
+    //displayAnimalsByType goes through all the animals list that AnimalZoo received and holds,
+    //printing out matching ones , and if none found, prints a message
+    private void displayAnimalsByType(String type) {
+        System.out.println("\n--- " + type + " ---");
+        boolean found = false;
 
-    if (!found) {
-        System.out.println("No " + type.toLowerCase() + "s found.");
+        for (Animal animal : animals) {
+            //getting class name as string without package name with getSimpleName() call, then ignoring case in comparison:
+            if (animal.getClass().getSimpleName().equalsIgnoreCase(type)) {
+                found = true;
+
+                System.out.println(animal);
+            }
+        }
+
+        if (!found) {
+            System.out.println("No " + type.toLowerCase() + "s found.");
+        }
     }
+    
+    private void displayAnimalsByHabitat(String habitat){
+        System.out.println("\n--- " + habitat + " ---");
+        boolean found = false;
+
+        for (Animal animal : animals) {
+            // Compare the animal's habitat to the provided habitat string (ignoring case)
+            if (animal.getHabitat().equalsIgnoreCase(habitat)) {
+                found = true;
+
+                System.out.println(animal);
+            }
+        }
+
+        if (!found) {
+            System.out.println("No " + habitat.toLowerCase() + "s found.");
+        }
     }
+    
 }

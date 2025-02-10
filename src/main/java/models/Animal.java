@@ -85,9 +85,14 @@ public abstract class Animal {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    //if need be the scanner in menu will always be reading string annd parsing later so i am following the pattern
+    public void setWeight(String weight) {
         
-        this.weight = weight;
+        try {
+            this.weight = Double.parseDouble(weight);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid weight format for Mammal: " + weight);
+        }
     }
 
     

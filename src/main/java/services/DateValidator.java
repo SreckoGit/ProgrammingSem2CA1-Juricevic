@@ -13,7 +13,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-//this class helps with ensuring date standard everywhere in the code
+//this class helps with ensuring date standard everywhere in the code,
+//enen though we format date here , default LocalDate toString changes slash into dash,
+//and needs to be formatted in get date
 public class DateValidator {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 

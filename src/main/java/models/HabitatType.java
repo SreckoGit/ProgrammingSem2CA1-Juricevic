@@ -8,20 +8,14 @@ package models;
  *
  * @author Sjuri
  */
-public enum HabitatType {
-    ARCTIC_SEA, 
-    ARCTIC_ISLANDS, 
-    CAATINGA, 
-    CAVE, 
+public enum HabitatType { 
     DESERT, 
-    GRASSLAND, 
-    MARINE, 
+    GRASSLAND,  
     MOUNTAIN, 
     RAINFOREST, 
     FOREST, 
     SAVANNAH,
     POND,
-    TROPICAL_SEA,
     OCEAN,
     SWAMP;
 
