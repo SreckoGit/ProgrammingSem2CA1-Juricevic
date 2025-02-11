@@ -22,7 +22,7 @@ public class Bird extends Animal{
      private static final List<String> VALID_COLOURS = List.of("White", "Black", "Brown", "Grey", "Yellow", "Red", "Blue", "Green");
     
     //constructor 
-    public Bird(String specie1, String name2, String habitat3, String dob4, String weight5,String birdSpecific6) {
+    public Bird(String specie1, String name2, String habitat3, String dob4, String weight5,String birdSpecific6)throws IllegalArgumentException {
         super(specie1, name2, habitat3, dob4, weight5);
         
         // Split type-specific data from index 6, separated by ","

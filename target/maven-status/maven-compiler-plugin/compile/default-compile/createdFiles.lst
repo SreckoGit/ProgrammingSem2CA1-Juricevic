@@ -6,6 +6,7 @@ app\Main.class
 models\Animal.class
 models\Bird.class
 models\Fish.class
+models\SpeciesType.class
 services\DateValidator.class
 factory\AnimalFactory.class
 services\AnimalZoo.class

@@ -19,7 +19,7 @@ public class Fish extends Animal {
     private static final List<String> VALID_WATER_TYPES = Arrays.asList("Freshwater", "Saltwater");
     private static final List<String> VALID_SCALES_TYPES = Arrays.asList("Smooth", "Rough");
 
-    public Fish(String specie1, String name2, String habitat3, String dob4, String weight5, String typeSpecific6) {
+    public Fish(String specie1, String name2, String habitat3, String dob4, String weight5, String typeSpecific6)throws IllegalArgumentException {
         super(specie1, name2, habitat3, dob4, weight5);
 
         //decided to add my own values as file did not specify fish and bird patterns 

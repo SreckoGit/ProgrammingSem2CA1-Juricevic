@@ -21,7 +21,7 @@ public enum HabitatType {
 
     public static boolean isValid(String habitat) {
         for (HabitatType h : HabitatType.values()) {
-            if (h.name().replace("_", " ").equalsIgnoreCase(habitat)) {
+            if (h.name().equalsIgnoreCase(habitat)) {
                 return true;
             }
         }

@@ -19,7 +19,7 @@ public class Mammal extends Animal {
     private static final List<String> VALID_PATTERNS = Arrays.asList("Spots", "Stripes", "Solid", "Checkered");
 
     //my constructor that checks for specific 
-    public Mammal(String specie1, String name2, String habitat3, String dob4, String weight5, String typeSpecific6) {
+    public Mammal(String specie1, String name2, String habitat3, String dob4, String weight5, String typeSpecific6) throws IllegalArgumentException {
         super(specie1, name2, habitat3, dob4, weight5);
 
         // Split the type-specific string

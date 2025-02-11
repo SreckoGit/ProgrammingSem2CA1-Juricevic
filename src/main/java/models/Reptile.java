@@ -20,7 +20,7 @@ public class Reptile extends Animal {
     private static final List<String> VALID_FAVOURITE_FOODS = Arrays.asList("Eggs","Meat", "Fish", "Insects", "Plants", "Small mammals", "Dwarves");
 
     //my constructor 
-    public Reptile(String specie, String name, String habitat, String dob, String weight, String typeSpecific6) {
+    public Reptile(String specie, String name, String habitat, String dob, String weight, String typeSpecific6)throws IllegalArgumentException {
         super(specie, name, habitat, dob, weight);
 
         String[] details = typeSpecific6.split(",");
