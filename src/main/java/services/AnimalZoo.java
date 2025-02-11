@@ -24,7 +24,7 @@ public class AnimalZoo {
         this.scanner = new Scanner(System.in);
     }
 
-    //the beginning loop menu
+    //the beginning loop menu tat calls other menus for display or creation of animal objects
     public void start() {
 
         while (true) {
@@ -67,6 +67,7 @@ public class AnimalZoo {
         }
     }
 
+    //loops through list and displays all
     private void displayAllAnimals() {
         System.out.println("\n--- All Animals ---");
         for (Animal animal : animals) {
@@ -74,6 +75,7 @@ public class AnimalZoo {
         }
     }
 
+    //offers menu to search by type and calls displayAnimalsByType(String type) which displays matching from the list
     private void searchByTypeMenu() {
         int typeChoice;
         while (true) {
@@ -122,6 +124,8 @@ public class AnimalZoo {
         }
     }
 
+    
+    //habitat menu that offers switch options and calls displayAnimalsByHabitat(String habitat), displaying matching from the list
     private void searchByHabitatMenu() {
         int habitatChoice;
         while (true) {
@@ -185,6 +189,8 @@ public class AnimalZoo {
         }
     }
 
+    
+    
     //displayAnimalsByType goes through all the animals list that AnimalZoo received and holds,
     //printing out matching ones , and if none found, prints a message
     private void displayAnimalsByType(String type) {
@@ -205,6 +211,7 @@ public class AnimalZoo {
         }
     }
 
+    
     //prints out animals whose habitat field matches the chosen one in menu
     private void displayAnimalsByHabitat(String habitat) {
         System.out.println("\n--- " + habitat + " ---");
@@ -224,6 +231,18 @@ public class AnimalZoo {
         }
     }
 
+    
+    /**
+ *
+ * Displays menu requesting information for creation of animal subclass objects,
+ * first variable type is used to request (in if-else statements) specific fields for 
+ * 4 Animal subclasses and finalize the creation of object. 
+ * "0" for exit is offered in every entry to return to previous menu.
+ * Specie type is checked/validated after input, with "continue" if invalid to reset loop.
+ * Habitat type is checked/validated after input, with "continue" if invalid to reset loop.
+ * 
+ * 
+ */
     private void addNewAnimal() {
         while (true) {
             try {
@@ -231,6 +250,9 @@ public class AnimalZoo {
                 String type = scanner.nextLine().trim();
                 if (type.equals("0")) {
                     return;
+                }else if (!AnimalType.isValid(type)) {
+                    System.out.println("Invalid type: " + type + ". Please try again.");
+                    continue;
                 }
 
                 System.out.print("Enter specie (Dog, Dragon, Eagle, Goldfish, Wolf, Snake, Parrot, Shark,\n"
@@ -239,10 +261,7 @@ public class AnimalZoo {
                 String specie = scanner.nextLine().trim();
                 if (specie.equals("0")) {
                     return;
-                }
-
-                //validating species after input and 0 check
-                if (!SpeciesType.isValid(specie)) {
+                } else if (!SpeciesType.isValid(specie)) {                  //validating species after input and 0 check
                     System.out.println("Invalid specie: " + specie + ". Please try again.");
                     continue;
                 }
@@ -257,9 +276,7 @@ public class AnimalZoo {
                 String habitat = scanner.nextLine().trim();
                 if (habitat.equals("0")) {
                     return;
-                }
-
-                if (!HabitatType.isValid(habitat)) {
+                }else if (!HabitatType.isValid(habitat)) {
                     System.out.println("Invalid habitat: " + habitat + ". Please try again.");
                     continue;
                 }
