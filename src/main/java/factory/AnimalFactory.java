@@ -33,6 +33,11 @@ public class AnimalFactory {
                 throw new IllegalArgumentException("Invalid habitat type: " + data[3]);
             }
             
+            //potential place to call SpeciesType.isValidForType(String specie, String type),
+            //but factory is used to create fromm read file which will not be 
+            //rewritten and is pointless checking as they are valid species for type
+            
+            
             // Example: assume data[0] is the animal type, rest is data in string format to be converted in animal class
             switch (data[0].toUpperCase()) {
                 case "MAMMAL":

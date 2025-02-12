@@ -238,7 +238,7 @@ public class AnimalZoo {
  * first variable type is used to request (in if-else statements) specific fields for 
  * 4 Animal subclasses and finalize the creation of object. 
  * "0" for exit is offered in every entry to return to previous menu.
- * Specie type is checked/validated after input, with "continue" if invalid to reset loop.
+ * Specie type is checked/validated after input, for example no Fish type will accept Elephant as specie
  * Habitat type is checked/validated after input, with "continue" if invalid to reset loop.
  * 
  * 
@@ -255,14 +255,17 @@ public class AnimalZoo {
                     continue;
                 }
 
-                System.out.print("Enter specie (Dog, Dragon, Eagle, Goldfish, Wolf, Snake, Parrot, Shark,\n"
-                        + "Tiger, Lion, Bear, Owl, Crocodile, Dolphin, Penguin, Elephant,\n"
-                        + "Kangaroo, Turtle, Fox, Octopus), 0 to exit: ");
+                System.out.print("Enter specie (Mammals: Dog, Wolf, Tiger, Lion, Bear, Elephant, Kangaroo, Fox | " +
+                 "Birds: Eagle, Parrot, Owl, Penguin | " +
+                 "Fish: Goldfish, Shark, Dolphin | " +
+                 "Reptiles: Snake, Crocodile, Turtle), 0 to exit: ");
+
                 String specie = scanner.nextLine().trim();
                 if (specie.equals("0")) {
                     return;
-                } else if (!SpeciesType.isValid(specie)) {                  //validating species after input and 0 check
-                    System.out.println("Invalid specie: " + specie + ". Please try again.");
+                    //vallidating , checking if the species given is allowed under the type group
+                } else if (!SpeciesType.isValidForType(specie, type)) {                  //validating species after input and 0 check
+                    System.out.println("Invalid specie: " + specie + " for type " + type + ". Please try again.");
                     continue;
                 }
 

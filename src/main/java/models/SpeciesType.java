@@ -4,6 +4,10 @@
  */
 package models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author Sjuri
@@ -14,12 +18,37 @@ public enum SpeciesType {
     TIGER, LION, BEAR, OWL, CROCODILE, DOLPHIN, PENGUIN, ELEPHANT,  
     KANGAROO, TURTLE, FOX, OCTOPUS;
 
-    public static boolean isValid(String input) {
-        for (SpeciesType species : SpeciesType.values()) {
-            if (species.name().equalsIgnoreCase(input)) {
-                return true;
-            }
+    /**
+     * 
+     * @param specie
+     * @param type
+     * @return true/false 
+     * gets species allowed for a certain type, then compares the species in parameters 
+     * with allowed species for the type, this prevents creation of a Fish object that is species Elephant
+     */
+    public static boolean isValidForType(String specie, String type) {
+        List<SpeciesType> validSpecies = getValidSpeciesForType(type); //call for allowed species for the type
+        try {
+            SpeciesType speciesType = SpeciesType.valueOf(specie.toUpperCase());
+            return validSpecies.contains(speciesType);
+        } catch (IllegalArgumentException e) {
+            return false;
         }
-        return false;
+    }
+
+    // Get the valid species list for a given type
+    private static List<SpeciesType> getValidSpeciesForType(String type) {
+        switch (type.toUpperCase()) {
+            case "MAMMAL":
+                return Arrays.asList(DOG, WOLF, TIGER, LION, BEAR, ELEPHANT, KANGAROO, FOX);
+            case "BIRD":
+                return Arrays.asList(EAGLE, PARROT, OWL, PENGUIN);
+            case "FISH":
+                return Arrays.asList(GOLDFISH, SHARK, DOLPHIN);
+            case "REPTILE":
+                return Arrays.asList(SNAKE, CROCODILE, TURTLE);
+            default:
+                return new ArrayList<>(); // Invalid type
+        }
     }
 }
