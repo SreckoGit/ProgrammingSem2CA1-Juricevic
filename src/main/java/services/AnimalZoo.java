@@ -382,7 +382,7 @@ public class AnimalZoo {
                     continue; //stop execution of the remaining code in the loop body and restart the loop.
                 }//end of type checks and constuctor calls 
 
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {  //one of constructors threw illegal argument exception , invalid field value
                 System.out.println("Error: " + e.getMessage() + ". Please try again.");
                 continue;
             }
