@@ -24,7 +24,8 @@ public class AnimalZoo {
         this.scanner = new Scanner(System.in);
     }
 
-    //the beginning loop menu tat calls other menus for display or creation of animal objects
+    //the beginning loop menu tat calls other menus for display or 
+    //creation of animal objects
     public void start() {
 
         while (true) {
@@ -46,7 +47,8 @@ public class AnimalZoo {
                 System.out.println("Invalid input. Please enter a number.");
                 continue; // Restart loop
             }
-            //methods called depending on case value, newer type of switch used for practicce
+            //methods called depending on case value, 
+            //newer type of switch used for practicce
             switch (choice) {
                 case 1 ->
                     displayAllAnimals();
@@ -75,10 +77,11 @@ public class AnimalZoo {
         }
     }
 
-    //offers menu to search by type and calls displayAnimalsByType(String type) which displays matching from the list
+    //offers menu to search by type and calls displayAnimalsByType(String type)
+    //which displays matching from the list
     private void searchByTypeMenu() {
         int typeChoice;
-        while (true) {
+        while (true) { //this loop causes menu restart after animals have been displayed
             System.out.println("\nSelect an animal type:");
             System.out.println("1 - Mammal");
             System.out.println("2 - Bird");
@@ -90,7 +93,8 @@ public class AnimalZoo {
             String input = scanner.nextLine(); // Read input as a string
 
             try {
-                typeChoice = Integer.parseInt(input);   //parsing input and covering a case of user entering letters
+                //parsing input and covering a case of user entering letters
+                typeChoice = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
                 continue; // Restart the loop
@@ -112,10 +116,11 @@ public class AnimalZoo {
                 case 4 ->
                     "Reptile";
                 default ->
-                    null;        //if 5 was given that will result in null returned
+                    null;     //if 5 was given that will result in null returned
             };
 
-            //now working with type we got from switch, but checking if proper number was given before:
+            //now working with type we got from switch, 
+            //but checking if proper number was given before:
             if (type != null) {
                 displayAnimalsByType(type);
             } else {
@@ -124,10 +129,11 @@ public class AnimalZoo {
         }
     }
 
-    
-    //habitat menu that offers switch options and calls displayAnimalsByHabitat(String habitat), displaying matching from the list
+    //habitat menu that offers switch options and calls 
+    //displayAnimalsByHabitat(String habitat), displaying matching from the list
     private void searchByHabitatMenu() {
         int habitatChoice;
+        //once we display all the items with displayanimals method we return here 
         while (true) {
             System.out.println("\nSelect an animal habitat:");
             System.out.println("1 - Desert");
@@ -145,7 +151,8 @@ public class AnimalZoo {
             String input = scanner.nextLine(); // Read input as a string
 
             try {
-                habitatChoice = Integer.parseInt(input);   //parsing input and covering a case of user entering letters
+                //parsing input and covering a case of user entering letters
+                habitatChoice = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
                 continue; // Restart the loop
@@ -189,8 +196,6 @@ public class AnimalZoo {
         }
     }
 
-    
-    
     //displayAnimalsByType goes through all the animals list that AnimalZoo received and holds,
     //printing out matching ones , and if none found, prints a message
     private void displayAnimalsByType(String type) {
@@ -198,7 +203,8 @@ public class AnimalZoo {
         boolean found = false;
 
         for (Animal animal : animals) {
-            //getting class name as string without package name with getSimpleName() call, then ignoring case in comparison:
+            //getting class name as string without package name with 
+            //getSimpleName() call, then ignoring case in comparison:
             if (animal.getClass().getSimpleName().equalsIgnoreCase(type)) {
                 found = true;
 
@@ -211,7 +217,6 @@ public class AnimalZoo {
         }
     }
 
-    
     //prints out animals whose habitat field matches the chosen one in menu
     private void displayAnimalsByHabitat(String habitat) {
         System.out.println("\n--- " + habitat + " ---");
@@ -231,18 +236,18 @@ public class AnimalZoo {
         }
     }
 
-    
     /**
- *
- * Displays menu requesting information for creation of animal subclass objects,
- * first variable type is used to request (in if-else statements) specific fields for 
- * 4 Animal subclasses and finalize the creation of object. 
- * "0" for exit is offered in every entry to return to previous menu.
- * Specie type is checked/validated after input, for example no Fish type will accept Elephant as specie
- * Habitat type is checked/validated after input, with "continue" if invalid to reset loop.
- * 
- * 
- */
+     *
+     * Displays menu requesting information for creation of animal subclass
+     * objects, first variable type is used to request (in if-else statements)
+     * specific fields for 4 Animal subclasses and finalize the creation of
+     * object. "0" for exit is offered in every entry to return to previous
+     * menu. Specie type is checked/validated after input, for example no Fish
+     * type will accept Elephant as specie Habitat type is checked/validated
+     * after input, with "continue" if invalid to reset loop.
+     *
+     *
+     */
     private void addNewAnimal() {
         while (true) {
             try {
@@ -250,20 +255,23 @@ public class AnimalZoo {
                 String type = scanner.nextLine().trim();
                 if (type.equals("0")) {
                     return;
-                }else if (!AnimalType.isValid(type)) {
+                } else if (!AnimalType.isValid(type)) {
                     System.out.println("Invalid type: " + type + ". Please try again.");
                     continue;
                 }
 
-                System.out.print("Enter specie (Mammals: Dog, Wolf, Tiger, Lion, Bear, Elephant, Kangaroo, Fox | " +
-                 "Birds: Eagle, Parrot, Owl, Penguin | " +
-                 "Fish: Goldfish, Shark, Dolphin | " +
-                 "Reptiles: Snake, Crocodile, Turtle), 0 to exit: ");
+                System.out.print("Enter specie:\n"
+                        + "Mammals: Dog, Wolf, Tiger, Lion, Bear, Elephant, Kangaroo, Fox\n"
+                        + "Birds: Eagle, Parrot, Owl, Penguin\n"
+                        + "Fish: Goldfish, Shark, Dolphin\n"
+                        + "Reptiles: Snake, Crocodile, Turtle\n"
+                        + "0 to exit: ");
 
                 String specie = scanner.nextLine().trim();
                 if (specie.equals("0")) {
                     return;
-                    //vallidating , checking if the species given is allowed under the type group
+                    //vallidating , checking if the species given is allowed 
+                    //under the type group
                 } else if (!SpeciesType.isValidForType(specie, type)) {                  //validating species after input and 0 check
                     System.out.println("Invalid specie: " + specie + " for type " + type + ". Please try again.");
                     continue;
@@ -279,15 +287,22 @@ public class AnimalZoo {
                 String habitat = scanner.nextLine().trim();
                 if (habitat.equals("0")) {
                     return;
-                }else if (!HabitatType.isValid(habitat)) {
+                } else if (!HabitatType.isValid(habitat)) {
                     System.out.println("Invalid habitat: " + habitat + ". Please try again.");
                     continue;
                 }
 
                 System.out.print("Enter Date of Birth (yyyy/MM/dd), 0 to exit: ");
                 String dob = scanner.nextLine().trim();
+                //what happens if format is not correct here?
+                //DateValidator.parseDate will throw invalidArgumentException
+                //and this menu will catch and restart the menu, creating a method in DateValidator 
+                //i made sure to validate it without waiting
                 if (dob.equals("0")) {
                     return;
+                } else if (!DateValidator.isValidDate(dob)) {  // Validate before using parseDate
+                    System.out.println("Invalid date format. Please enter in yyyy/MM/dd.");
+                    continue; // Ask again
                 }
 
                 System.out.print("Enter weight, 0 to exit: ");
@@ -317,7 +332,7 @@ public class AnimalZoo {
 
                     Animal animal = new Mammal(specie, name, habitat, dob, weight, extraInfo);
                     animals.add(animal);
-                    System.out.println("Sucess! "+ animal.toString());
+                    System.out.println("Sucess! " + animal.toString());
                     break;
 
                 } else if (type.equalsIgnoreCase("Bird")) {
@@ -337,7 +352,7 @@ public class AnimalZoo {
 
                     Animal animal = new Bird(specie, name, habitat, dob, weight, extraInfo);
                     animals.add(animal);
-                    System.out.println("Sucess! "+ animal.toString());
+                    System.out.println("Success! " + animal.toString());
                     break;
 
                 } else if (type.equalsIgnoreCase("Fish")) {
@@ -357,7 +372,7 @@ public class AnimalZoo {
 
                     Animal animal = new Fish(specie, name, habitat, dob, weight, extraInfo);
                     animals.add(animal);
-                    System.out.println("Sucess! "+ animal.toString());
+                    System.out.println("Sucess! " + animal.toString());
                     break;
 
                 } else if (type.equalsIgnoreCase("Reptile")) {
@@ -377,13 +392,10 @@ public class AnimalZoo {
 
                     Animal animal = new Reptile(specie, name, habitat, dob, weight, extraInfo);
                     animals.add(animal);
-                    System.out.println("Sucess! "+ animal.toString());
+                    System.out.println("Sucess! " + animal.toString());
                     break;
 
-                } else {
-                    System.out.println("Did not receive a proper type: " + type + ", Please try again.");
-                    continue; //stop execution of the remaining code in the loop body and restart the loop.
-                }//end of type checks and constuctor calls 
+                }
 
             } catch (IllegalArgumentException e) {  //one of constructors threw illegal argument exception , invalid field value
                 System.out.println("Error: " + e.getMessage() + ". Please try again.");

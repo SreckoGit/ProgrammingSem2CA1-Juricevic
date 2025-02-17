@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package services;
+
 import java.io.*;
 import java.util.*;
+
 /**
  *
  * @author Sjuri
@@ -15,21 +17,23 @@ public class FileReaderServices {
         // List to store each animal's data as a String array
         ArrayList<String[]> list = new ArrayList<>();
 
-        // Line counter to track where errors occur
+        // Line counter to track where errors occur, included in exception message when thrown
         int lineCount = 1;
 
-        // Get file as a resource
+        // Get file as a resource, mavenalways looks for the file in project\src\main\resources,
+        //where it is located now
         InputStream inputStream = FileReaderServices.class.getClassLoader().getResourceAsStream(filePath);
-
 
         // Using try-with-resources to ensure the Scanner is closed automatically
         try (Scanner scanner = new Scanner(new InputStreamReader(inputStream))) {
 
-            // Read the file in chunks of 4 lines
+            // Read the file in chunks of 4 lines,
+            //this loop ensures that the program reads the file until the end, 
+            //regardless of how many animal records are in the file
             while (scanner.hasNext()) {
 
                 // creating an array to hold animal details
-                String[] fields = new String[8];  
+                String[] fields = new String[8];
 
                 // Read four lines per animal entry
                 for (int i = 0; i < 4; i++) {
@@ -80,10 +84,11 @@ public class FileReaderServices {
                                 throw new IOException("Invalid format at line " + lineCount);
                             }
                         }
-                        default -> throw new IOException("Unexpected case in data processing.");
+                        default ->
+                            throw new IOException("Unexpected case in data processing.");
                     }
 
-                    // Increment line counter for each processed line
+                    //Increment line counter for each processed line
                     lineCount++;
                 }
 
